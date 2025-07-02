@@ -34,7 +34,7 @@ jobs:
             /p:CoverletOutputFormat=cobertura \
             /p:Exclude="[xunit.*]*" \
             /p:Include="[trans.tracker.lb*]*" \
-            /p:CoverletOutput=TestResults/coverage
+            /p:CoverletOutput=TestResults/coverage \
             --logger "console;verbosity=detailed"
 
 
