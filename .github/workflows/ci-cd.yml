@@ -27,7 +27,7 @@ jobs:
       - name: 🧪 Run tests with coverage
         working-directory: src/trans.tracker.lb
         run: |
-          dotnet test trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
+          dotnet test --logger "console;verbosity=detailed" trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
             --no-build \
             --configuration Release \
             /p:CollectCoverage=true \
