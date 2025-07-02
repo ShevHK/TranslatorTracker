@@ -43,7 +43,7 @@ jobs:
             reportgenerator \
             -reports:"trans.tracker.lb.tests/TestResults/*/coverage.cobertura.xml" \
             -targetdir:CoverageReport \
-            -reporttypes:HtmlSummary;TextSummary
+            -reporttypes:"HtmlSummary;TextSummary""
 
       - name: 🛡️ Enforce 50% minimum coverage
         run: |
