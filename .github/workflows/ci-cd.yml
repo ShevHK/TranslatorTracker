@@ -34,7 +34,7 @@ jobs:
             /p:CollectCoverage=true \
             /p:CoverletOutputFormat=cobertura \
             /p:Exclude="[xunit.*]*" \
-            /p:Include="[trans.tracker.lb*]*" \
+            /p:Include="[trans.tracker.lb.tests*]*" \
             /p:CoverletOutput=TestResults/coverage
 
       - name: 📊 Install ReportGenerator
