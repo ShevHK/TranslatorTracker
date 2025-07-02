@@ -50,9 +50,14 @@ jobs:
         run: |
             summary=$(cat CoverageReport/Summary.txt | grep "Line coverage" | head -n1)
             echo "Coverage Summary: $summary"
-            percent=$(echo "$summary" | grep -oE "[0-9]+\.[0-9]+")
+            percent=$(echo "$summary" | grep -oE "[0-9]+(\.[0-9]+)?")
             echo "Extracted percent: $percent"
             coverage=${percent%.*}
+            if [ -z "$coverage" ]; then
+            echo "❌ Could not extract coverage percent"
+            exit 1
+            fi
+            
             if [ "$coverage" -lt 50 ]; then
             echo "❌ Code coverage is below 50% ($coverage%)"
             exit 1
