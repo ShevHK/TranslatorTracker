@@ -47,17 +47,18 @@ jobs:
 
       - name: 🛡️ Enforce 50% minimum coverage
         run: |
-          summary=$(cat CoverageReport/Summary.txt | grep "Line coverage" | head -n1)
-          echo "Coverage Summary: $summary"
-          percent=$(echo "$summary" | grep -oE "[0-9]+\.[0-9]+")
-          echo "Extracted percent: $percent"
-          coverage=${percent%.*}
-          if [ "$coverage" -lt 50 ]; then
+            working-directory: src/trans.tracker.lb
+            summary=$(cat CoverageReport/Summary.txt | grep "Line coverage" | head -n1)
+            echo "Coverage Summary: $summary"
+            percent=$(echo "$summary" | grep -oE "[0-9]+\.[0-9]+")
+            echo "Extracted percent: $percent"
+            coverage=${percent%.*}
+            if [ "$coverage" -lt 50 ]; then
             echo "❌ Code coverage is below 50% ($coverage%)"
             exit 1
-          else
+            else
             echo "✅ Code coverage is sufficient ($coverage%)"
-          fi
+            fi
 
       - name: 📤 Upload HTML coverage report as artifact
         uses: actions/upload-artifact@v4
