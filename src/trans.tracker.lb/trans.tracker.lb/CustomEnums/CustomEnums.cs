@@ -1,4 +1,4 @@
-﻿namespace TranslatorTracker.CustomEnums
+﻿namespace trans.tracker.lb.CustomEnums
 {
     public enum WorkingDates
     {

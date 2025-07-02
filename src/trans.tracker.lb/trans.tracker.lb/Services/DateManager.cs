@@ -1,6 +1,6 @@
-﻿using TranslatorTracker.CustomEnums;
+﻿using trans.tracker.lb.CustomEnums;
 
-namespace TranslatorTracker.Services
+namespace trans.tracker.lb.Services
 {
     public class DateManager
     {

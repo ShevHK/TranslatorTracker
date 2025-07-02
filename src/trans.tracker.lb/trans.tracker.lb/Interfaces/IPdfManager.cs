@@ -1,6 +1,6 @@
-﻿namespace TranslatorTracker.Interfaces
+﻿namespace trans.tracker.lb.Interfaces
 {
-    internal interface IPdfManager
+    public interface IPdfManager
     {
         int GetSymbolsCount(string path, bool includeSpaces = true);
     }

@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
-using TranslatorTracker.Interfaces;
+using trans.tracker.lb.Interfaces;
 using UglyToad.PdfPig;
 
-namespace TranslatorTracker.Services;
+namespace trans.tracker.lb.Services;
 public class PdfManager : IPdfManager
 {
-    public readonly Regex _nonLetterSymbols = new Regex(@"[^a-zA-Zа-яА-ЯіІїЇєЄґҐ]", RegexOptions.Compiled);
+    public readonly Regex _nonLetterSymbols = new Regex("[^a-zA-Zа-яА-ЯіІїЇєЄґҐ\" \"]", RegexOptions.Compiled);
     public int GetSymbolsCount(string path, bool includeSpaces = true)
     {
         using var document = PdfDocument.Open(path);

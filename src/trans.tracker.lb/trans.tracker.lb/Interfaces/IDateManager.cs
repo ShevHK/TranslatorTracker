@@ -1,6 +1,6 @@
-﻿using TranslatorTracker.CustomEnums;
+﻿using trans.tracker.lb.CustomEnums;
 
-namespace TranslatorTracker.Interfaces
+namespace trans.tracker.lb.Interfaces
 {
     public interface IDateManager
     {
