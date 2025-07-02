@@ -28,13 +28,13 @@ jobs:
 
       - name: 🧪 Run tests with coverage
         run: |
-            dotnet test TranslatorTracker/src/trans.tracker.lb/trans.tracker.lb.tests/trans.tracker.lb.tests.csproj
-            --no-build 
-            --configuration Release 
-            /p:CollectCoverage=true 
-            /p:CoverletOutputFormat=cobertura 
-            /p:Exclude="[xunit.*]*" 
-            /p:Include="[trans.tracker.lb.tests*]*"
+          dotnet test TranslatorTracker/src/trans.tracker.lb/trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
+            --no-build \
+            --configuration Release \
+            /p:CollectCoverage=true \
+            /p:CoverletOutputFormat=cobertura \
+            /p:Exclude="[xunit.*]*" \
+            /p:Include="[trans.tracker.lb*]*" \
             /p:CoverletOutput=TestResults/coverage
 
       - name: 📊 Install ReportGenerator
