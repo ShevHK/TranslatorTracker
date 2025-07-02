@@ -12,8 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
         run:
-            working-directory: TranslatorTracker/src/trans.tracker.lb
+            working-directory: src/trans.tracker.lb
     steps:
+      - name: Show current directory
+        run: pwd
+      - name: List top-level folders
+        run: ls -l
+
       - name: ⬇ Checkout code
         uses: actions/checkout@v3
 
@@ -30,7 +35,7 @@ jobs:
 
       - name: 🧪 Run tests with coverage
         run: |
-          dotnet test TranslatorTracker/src/trans.tracker.lb/trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
+          dotnet test TranslatorTracker/TranslatorTracker/TranslatorTracker/src/trans.tracker.lb/trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
             --no-build \
             --configuration Release \
             /p:CollectCoverage=true \
