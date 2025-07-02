@@ -1,0 +1,72 @@
+name: CI/CD with Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇ Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set working directory for next steps
+        run: echo "working-directory set for future steps"
+
+      - name: 📦 Restore dependencies
+        working-directory: src/trans.tracker.lb
+        run: dotnet restore
+
+      - name: 🏗️ Build solution
+        working-directory: src/trans.tracker.lb
+        run: dotnet build --no-restore --configuration Release
+
+      - name: 🧪 Run tests with coverage
+        working-directory: src/trans.tracker.lb
+        run: |
+            dotnet test trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
+              --no-build \
+              --configuration Release \
+              --collect:"XPlat Code Coverage" \
+              --logger "console;verbosity=detailed" \
+              -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+
+      - name: 📊 Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: 📈 Generate coverage report
+        working-directory: src/trans.tracker.lb
+        run: |
+            reportgenerator \
+            -reports:"trans.tracker.lb.tests/TestResults/*/coverage.cobertura.xml" \
+            -targetdir:CoverageReport \
+            -reporttypes:"HtmlSummary;TextSummary"
+
+      - name: 🛡️ Enforce 50% minimum coverage
+        working-directory: src/trans.tracker.lb
+        run: |
+            summary=$(cat CoverageReport/Summary.txt | grep "Line coverage" | head -n1)
+            echo "Coverage Summary: $summary"
+            percent=$(echo "$summary" | grep -oE "[0-9]+(\.[0-9]+)?")
+            echo "Extracted percent: $percent"
+            coverage=${percent%.*}
+            if [ -z "$coverage" ]; then
+            echo "❌ Could not extract coverage percent"
+            exit 1
+            fi
+            
+            if [ "$coverage" -lt 50 ]; then
+            echo "❌ Code coverage is below 50% ($coverage%)"
+            exit 1
+            else
+            echo "✅ Code coverage is sufficient ($coverage%)"
+            fi
+
+      - name: 📤 Upload HTML coverage report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: CoverageReport
