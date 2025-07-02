@@ -39,6 +39,11 @@ jobs:
       - name: 📊 Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
+
+      - name: Check coverage output files
+        working-directory: src/trans.tracker.lb  
+        run: ls -l TestResults/coverage
+
       - name: 📈 Generate coverage report
         working-directory: src/trans.tracker.lb
         run: |
@@ -46,10 +51,6 @@ jobs:
             -reports:TestResults/coverage/coverage.cobertura.xml \
             -targetdir:CoverageReport \
             -reporttypes:HtmlSummary;TextSummary
-
-      - name: Check coverage output files
-        working-directory: src/trans.tracker.lb  
-        run: ls -l TestResults/coverage
 
       - name: 🛡️ Enforce 50% minimum coverage
         run: |
