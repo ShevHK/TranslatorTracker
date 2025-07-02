@@ -41,11 +41,6 @@ jobs:
       - name: 📊 Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
-
-      - name: Check coverage output files
-        working-directory: src/trans.tracker.lb  
-        run: ls -l TestResults/coverage
-
       - name: 📈 Generate coverage report
         working-directory: src/trans.tracker.lb
         run: |
