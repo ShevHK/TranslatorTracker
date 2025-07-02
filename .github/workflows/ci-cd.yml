@@ -27,15 +27,12 @@ jobs:
       - name: 🧪 Run tests with coverage
         working-directory: src/trans.tracker.lb
         run: |
-          dotnet test trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
-            --no-build \
-            --configuration Release \
-            /p:CollectCoverage=true \
-            /p:CoverletOutputFormat=cobertura \
-            /p:Exclude="[xunit.*]*" \
-            /p:Include="[trans.tracker.lb*]*" \
-            /p:CoverletOutput=TestResults/coverage \
-            --logger "console;verbosity=detailed"
+            dotnet test trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
+              --no-build \
+              --configuration Release \
+              --collect:"XPlat Code Coverage" \
+              --logger "console;verbosity=detailed" \
+              -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
 
 
       - name: 📊 Install ReportGenerator
