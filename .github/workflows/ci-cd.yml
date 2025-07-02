@@ -46,8 +46,8 @@ jobs:
             -reporttypes:"HtmlSummary;TextSummary"
 
       - name: 🛡️ Enforce 50% minimum coverage
+        working-directory: src/trans.tracker.lb
         run: |
-            working-directory: src/trans.tracker.lb
             summary=$(cat CoverageReport/Summary.txt | grep "Line coverage" | head -n1)
             echo "Coverage Summary: $summary"
             percent=$(echo "$summary" | grep -oE "[0-9]+\.[0-9]+")
