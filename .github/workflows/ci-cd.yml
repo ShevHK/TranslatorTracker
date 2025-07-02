@@ -12,13 +12,7 @@ jobs:
     steps:
       - name: ⬇ Checkout code
         uses: actions/checkout@v3
-
-      - name: Show current directory
-        run: pwd
-
-      - name: List top-level folders
-        run: ls -l
-
+      
       - name: Set working directory for next steps
         run: echo "working-directory set for future steps"
 
@@ -52,6 +46,10 @@ jobs:
             -reports:TestResults/coverage/coverage.cobertura.xml \
             -targetdir:CoverageReport \
             -reporttypes:HtmlSummary;TextSummary
+
+      - name: Check coverage output files
+        working-directory: src/trans.tracker.lb  
+        run: ls -l TestResults/coverage
 
       - name: 🛡️ Enforce 50% minimum coverage
         run: |
