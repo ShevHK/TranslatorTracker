@@ -10,7 +10,9 @@ jobs:
   build-test:
     name: Build, Test & Enforce Coverage
     runs-on: ubuntu-latest
-
+    defaults:
+        run:
+            working-directory: TranslatorTracker/src/trans.tracker.lb
     steps:
       - name: ⬇ Checkout code
         uses: actions/checkout@v3
