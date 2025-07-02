@@ -40,7 +40,7 @@ jobs:
       - name: 📈 Generate coverage report
         working-directory: src/trans.tracker.lb
         run: |
-            -reportgenerator \
+            reportgenerator \
             -reports:"trans.tracker.lb.tests/TestResults/*/coverage.cobertura.xml" \
             -targetdir:CoverageReport \
             -reporttypes:HtmlSummary;TextSummary
