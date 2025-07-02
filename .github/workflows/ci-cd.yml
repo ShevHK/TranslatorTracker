@@ -34,15 +34,14 @@ jobs:
               --logger "console;verbosity=detailed" \
               -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
 
-
       - name: 📊 Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
       - name: 📈 Generate coverage report
         working-directory: src/trans.tracker.lb
         run: |
-            reportgenerator \
-            -reports:TestResults/coverage/coverage.cobertura.xml \
+            -reportgenerator \
+            -reports:"trans.tracker.lb.tests/TestResults/*/coverage.cobertura.xml" \
             -targetdir:CoverageReport \
             -reporttypes:HtmlSummary;TextSummary
 
