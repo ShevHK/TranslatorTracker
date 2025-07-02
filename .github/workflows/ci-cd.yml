@@ -17,7 +17,7 @@ jobs:
       - name: Show current directory
         run: pwd
       - name: List top-level folders
-        run: ls -l
+        run: ls -R
 
       - name: ⬇ Checkout code
         uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
 
       - name: 🧪 Run tests with coverage
         run: |
-          dotnet test TranslatorTracker/TranslatorTracker/TranslatorTracker/src/trans.tracker.lb/trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
+          dotnet test trans.tracker.lb.tests/trans.tracker.lb.tests.csproj \
             --no-build \
             --configuration Release \
             /p:CollectCoverage=true \
